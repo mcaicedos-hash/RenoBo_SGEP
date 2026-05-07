@@ -16,7 +16,7 @@
    * Reemplazar este valor por la URL real después de desplegar el script.
    * Si queda vacía, el envío hará una simulación local (modo desarrollo).
    */
-  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzDazvJtwVfhEqyZgvqqXt0GCPrPOcRK2dQlBP3JBMOMD9VBkwpcPrHMm_xuugW0QFobg/exec';
+  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxVsNp8aUFFldeEJ78s1nvS_PoZimTFgnFtypiZWW9XHKTQh3NQ2ruHoxc86VXwy8zVxw/exec';
   // Ej: 'https://script.google.com/macros/s/AKfycbx.../exec'
 
   const STORAGE_KEY = 'renobo_clima_v1';
@@ -25,12 +25,11 @@
   const GROUPS = [
     { id: 'medina',   name: 'Equipo Daniel Medina',                type: 'Apoyo a la supervisión' },
     { id: 'prieto',   name: 'Equipo Jaime Prieto',                 type: 'Apoyo a la supervisión' },
-    { id: 'napo',     name: 'Equipo José Napoleón',              type: 'Apoyo a la supervisión' },
-    { id: 'lida',     name: 'Equipo Lida Giraldo',                type: 'Apoyo a la supervisión' },
+    { id: 'napo-lida', name: 'Equipos José Napoleón y Lida Giraldo', type: 'Apoyo a la supervisión (sesión conjunta)' },
     { id: 'molina',   name: 'Equipo María Mercedes Molina',        type: 'Apoyo a la supervisión' },
     { id: 'sossa',    name: 'Equipo Julián Sossa',                 type: 'Apoyo a la supervisión' },
     { id: 'jimenez',  name: 'Equipo Vanessa Jiménez',              type: 'Apoyo a la supervisión' },
-    { id: 'cervera',  name: 'Equipo Yury Cervera',                 type: 'Apoyo a la supervisión' },
+    { id: 'cervera',  name: 'Equipo Yory Cervera',                 type: 'Apoyo a la supervisión' },
     { id: 'tecnico',  name: 'Equipo Técnico Transversal',          type: 'Equipo transversal' },
     { id: 'juridico', name: 'Equipo Jurídico Transversal',         type: 'Equipo transversal' },
     { id: 'seguim',   name: 'Equipo de Seguimiento Transversal',   type: 'Equipo transversal' }
