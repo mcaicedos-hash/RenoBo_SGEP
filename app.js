@@ -16,7 +16,7 @@
    * Reemplazar este valor por la URL real después de desplegar el script.
    * Si queda vacía, el envío hará una simulación local (modo desarrollo).
    */
-  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxVsNp8aUFFldeEJ78s1nvS_PoZimTFgnFtypiZWW9XHKTQh3NQ2ruHoxc86VXwy8zVxw/exec';
+  const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbzDazvJtwVfhEqyZgvqqXt0GCPrPOcRK2dQlBP3JBMOMD9VBkwpcPrHMm_xuugW0QFobg/exec';
   // Ej: 'https://script.google.com/macros/s/AKfycbx.../exec'
 
   const STORAGE_KEY = 'renobo_clima_v1';
