@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico de Clima Organizacional · SGEP · RenoBo</title>
+  <meta name="description" content="Diagnóstico de Clima Organizacional — Subgerencia de Ejecución de Proyectos, RenoBo. Compromiso 4 — Gestión Cultural." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Barra de progreso superior. Se llena con el color de acento conforme se avanza. -->
+  <div class="progress" aria-hidden="true">
+    <div class="progress__bar" id="progressBar"></div>
+  </div>
+
+  <main id="app" class="app">
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 0 · PORTADA                                          -->
+    <!-- ========================================================== -->
+    <section class="slide slide--cover is-active" data-slide="cover">
+      <div class="slide__inner cover__inner">
+        <div class="cover__eyebrow">
+          <span class="cover__pill">Compromiso 4 · Gestión Cultural</span>
+        </div>
+
+        <h1 class="cover__title">
+          Diagnóstico de<br />
+          <span class="cover__title-highlight">clima organizacional</span>
+        </h1>
+
+        <p class="cover__sub">
+          Subgerencia de Ejecución de Proyectos — Empresa de Renovación
+          y Desarrollo Urbano de Bogotá.
+        </p>
+
+        <div class="cover__meta">
+          <div class="cover__meta-item">
+            <span class="cover__meta-label">Actividad</span>
+            <span class="cover__meta-value">04A</span>
+          </div>
+          <div class="cover__meta-divider" aria-hidden="true"></div>
+          <div class="cover__meta-item">
+            <span class="cover__meta-label">Referencia</span>
+            <span class="cover__meta-value">GI-59 v1</span>
+          </div>
+          <div class="cover__meta-divider" aria-hidden="true"></div>
+          <div class="cover__meta-item">
+            <span class="cover__meta-label">Duración</span>
+            <span class="cover__meta-value">~10 min</span>
+          </div>
+        </div>
+
+        <button class="btn btn--primary cover__cta" data-action="next">
+          Comenzar
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <!-- Ornamento geométrico — círculos del color de acento, sin texto. -->
+        <div class="cover__ornament" aria-hidden="true">
+          <span class="cover__dot cover__dot--lg"></span>
+          <span class="cover__dot cover__dot--md"></span>
+          <span class="cover__dot cover__dot--sm"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 1 · CONTEXTO BREVE                                   -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="context">
+      <div class="slide__inner content__inner">
+        <span class="eyebrow">Antes de comenzar</span>
+        <h2 class="content__title">
+          Esto <span class="hl">no evalúa personas</span>. Mide cómo está
+          funcionando el liderazgo en cada grupo de trabajo.
+        </h2>
+        <p class="content__lead">
+          La encuesta toma cerca de diez minutos y mide tres parámetros
+          definidos en la Guía de Gestión Integral de Proyectos:
+          Liderazgo de Negocio, Liderazgo Servicial y Liderazgo Técnico.
+          Las respuestas son individuales y se consolidan por grupo,
+          nunca por persona.
+        </p>
+
+        <ul class="bullets">
+          <li><span class="bullets__dot"></span>15 preguntas en total, divididas en 3 bloques.</li>
+          <li><span class="bullets__dot"></span>Mezcla preguntas de escala con preguntas abiertas.</li>
+          <li><span class="bullets__dot"></span>Sus respuestas alimentan acciones de fortalecimiento focalizadas.</li>
+        </ul>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 2 · SELECCIÓN DE GRUPO DE TRABAJO                    -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="group">
+      <div class="slide__inner content__inner">
+        <span class="eyebrow">Paso 1 de 4 · Identificación del grupo</span>
+        <h2 class="content__title">
+          ¿En qué <span class="hl">grupo de trabajo</span> participa
+          principalmente?
+        </h2>
+        <p class="content__lead content__lead--tight">
+          Si participa en más de un grupo, elija aquel donde su tiempo
+          de dedicación sea mayor. Este es el único dato que segmenta
+          los resultados — no se solicita su nombre.
+        </p>
+
+        <div class="cards" id="groupCards" role="radiogroup" aria-label="Grupo de trabajo">
+          <!-- Grupos generados por JS -->
+        </div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next" data-require="group">Continuar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 3 · INTRO BLOQUE 1 · LIDERAZGO DE NEGOCIO            -->
+    <!-- ========================================================== -->
+    <section class="slide slide--dark" data-slide="intro-1">
+      <div class="slide__inner intro__inner">
+        <div class="intro__numberWrap">
+          <span class="intro__numberLabel">Bloque 01</span>
+          <span class="intro__number">01</span>
+        </div>
+        <h2 class="intro__title">Liderazgo de Negocio</h2>
+        <p class="intro__lead">
+          Está enfocado en el <em>valor</em> y en que el proyecto sea viable
+          y rentable. Mantiene viva la pregunta sobre <em>para qué</em>
+          hacemos este proyecto, quién es el cliente y con qué recursos.
+        </p>
+        <ul class="intro__keys">
+          <li><span class="intro__keyDot"></span>Estructuración del producto correcto</li>
+          <li><span class="intro__keyDot"></span>Priorización en la ejecución</li>
+          <li><span class="intro__keyDot"></span>Aseguramiento del presupuesto</li>
+          <li><span class="intro__keyDot"></span>Seguimiento al Ciclo de Maduración</li>
+        </ul>
+
+        <div class="nav nav--dark">
+          <button class="btn btn--ghost btn--ghost-dark" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Empezar bloque 1</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 4 · P1 (abierta)                                     -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q1" data-block="1" data-qid="q1" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo de Negocio</span>
+          <span class="qheader__count">Pregunta 01 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Si tuvieras que explicarle a alguien que no conoce RenoBo
+          <span class="hl">quién es el cliente</span> de nuestros proyectos
+          y <span class="hl">qué le estamos entregando</span>, ¿cómo se lo dirías?
+        </h2>
+
+        <textarea
+          class="textarea"
+          name="q1"
+          rows="7"
+          maxlength="1500"
+          placeholder="Escriba su respuesta aquí. Use sus propias palabras, sin estructura formal."
+        ></textarea>
+        <div class="textarea__counter"><span data-counter="q1">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 5 · P2 (Likert)                                      -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q2" data-block="1" data-qid="q2" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo de Negocio</span>
+          <span class="qheader__count">Pregunta 02 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Conozco el <span class="hl">presupuesto</span> de los proyectos
+          y de dónde provienen sus recursos.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4">
+          <!-- Inyectada por JS -->
+        </div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 6 · P3 (Likert)                                      -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q3" data-block="1" data-qid="q3" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo de Negocio</span>
+          <span class="qheader__count">Pregunta 03 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Tengo claro cuáles son las <span class="hl">fases y subfases</span>
+          de maduración de los proyectos en RenoBo y puedo identificar
+          exactamente en cuál se encuentran los proyectos.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 7 · P4 (Likert)                                      -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q4" data-block="1" data-qid="q4" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo de Negocio</span>
+          <span class="qheader__count">Pregunta 04 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Identifico con claridad la <span class="hl">cadena de valor</span>
+          del proyecto y los entregables que la componen.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 8 · P5 (abierta)                                     -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q5" data-block="1" data-qid="q5" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo de Negocio</span>
+          <span class="qheader__count">Pregunta 05 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Más allá de lo planeado en los convenios o contratos marco,
+          <span class="hl">¿qué ha aprendido este grupo</span> durante el
+          desarrollo de los proyectos que no estaba en el alcance original?
+        </h2>
+        <p class="question__hint">
+          Pueden ser conocimientos, capacidades, prácticas o lecciones aprendidas.
+        </p>
+
+        <textarea class="textarea" name="q5" rows="7" maxlength="1500"
+          placeholder="Mencione conocimientos, prácticas o lecciones aprendidas."></textarea>
+        <div class="textarea__counter"><span data-counter="q5">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 9 · INTRO BLOQUE 2 · LIDERAZGO SERVICIAL             -->
+    <!-- ========================================================== -->
+    <section class="slide slide--dark" data-slide="intro-2">
+      <div class="slide__inner intro__inner">
+        <div class="intro__numberWrap">
+          <span class="intro__numberLabel">Bloque 02</span>
+          <span class="intro__number">02</span>
+        </div>
+        <h2 class="intro__title">Liderazgo Servicial</h2>
+        <p class="intro__lead">
+          Está enfocado en la <em>velocidad</em> — eliminar cuellos de
+          botella y conectar al equipo con las áreas o entidades que
+          puedan estar trabando el avance.
+        </p>
+        <ul class="intro__keys">
+          <li><span class="intro__keyDot"></span>Liberación de impedimentos</li>
+          <li><span class="intro__keyDot"></span>Gestión de la UCT</li>
+          <li><span class="intro__keyDot"></span>Coordinación de recursos y herramientas</li>
+          <li><span class="intro__keyDot"></span>Gestión de conflictos</li>
+        </ul>
+
+        <div class="nav nav--dark">
+          <button class="btn btn--ghost btn--ghost-dark" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Empezar bloque 2</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 10 · P6 (abierta)                                    -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q6" data-block="2" data-qid="q6" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Servicial</span>
+          <span class="qheader__count">Pregunta 06 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Cuando aparece un <span class="hl">impedimento</span> en tu trabajo,
+          ¿qué haces concretamente para resolverlo?
+        </h2>
+        <p class="question__hint">
+          Cuéntanos paso a paso: a quién acudes, qué consultas, qué decides por tu cuenta.
+        </p>
+
+        <textarea class="textarea" name="q6" rows="7" maxlength="1500"
+          placeholder="Describa su proceso paso a paso."></textarea>
+        <div class="textarea__counter"><span data-counter="q6">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 11 · P7 (Likert)                                     -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q7" data-block="2" data-qid="q7" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Servicial</span>
+          <span class="qheader__count">Pregunta 07 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Recibo <span class="hl">a tiempo</span> la información que
+          necesito para hacer mi trabajo.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 12 · P8 (Likert)                                     -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q8" data-block="2" data-qid="q8" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Servicial</span>
+          <span class="qheader__count">Pregunta 08 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Las <span class="hl">directrices</span> que recibo de mis superiores
+          son consistentes entre sí y se alinean con la operación del día a día.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 13 · P9 (mapeo de actores) — Especial                -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q9" data-block="2" data-qid="q9" data-qtype="actors">
+      <div class="slide__inner question__inner question__inner--wide">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Servicial</span>
+          <span class="qheader__count">Pregunta 09 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Hoy, ¿con qué <span class="hl">áreas internas</span> o
+          <span class="hl">entidades externas</span> tienen gestiones
+          represadas?
+        </h2>
+        <p class="question__hint">
+          Para cada una indique qué está pendiente y desde cuándo. Puede agregar
+          tantas como necesite.
+        </p>
+
+        <div class="actors" id="actorsList">
+          <!-- Filas de actores se inyectan por JS -->
+        </div>
+
+        <button class="btn btn--secondary actors__add" type="button" id="addActor">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Agregar otro actor
+        </button>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 14 · P10 (abierta)                                   -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q10" data-block="2" data-qid="q10" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Servicial</span>
+          <span class="qheader__count">Pregunta 10 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          ¿Cómo describirían el <span class="hl">ambiente de trabajo</span>
+          dentro de este grupo?
+        </h2>
+        <p class="question__hint">
+          Pueden usar palabras concretas, imágenes o metáforas.
+        </p>
+
+        <textarea class="textarea" name="q10" rows="6" maxlength="1500"
+          placeholder="Palabras, imágenes, metáforas..."></textarea>
+        <div class="textarea__counter"><span data-counter="q10">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 15 · INTRO BLOQUE 3 · LIDERAZGO TÉCNICO              -->
+    <!-- ========================================================== -->
+    <section class="slide slide--dark" data-slide="intro-3">
+      <div class="slide__inner intro__inner">
+        <div class="intro__numberWrap">
+          <span class="intro__numberLabel">Bloque 03</span>
+          <span class="intro__number">03</span>
+        </div>
+        <h2 class="intro__title">Liderazgo Técnico</h2>
+        <p class="intro__lead">
+          Está enfocado en la <em>calidad</em> y en el cumplimiento normativo
+          de la disciplina. Define estándares, lidera la mesa técnica y
+          asegura la coherencia de los entregables.
+        </p>
+        <ul class="intro__keys">
+          <li><span class="intro__keyDot"></span>Definición de estándares técnicos</li>
+          <li><span class="intro__keyDot"></span>Liderazgo de la mesa técnica</li>
+          <li><span class="intro__keyDot"></span>Coherencia de entregables</li>
+          <li><span class="intro__keyDot"></span>Mitigación de riesgos de calidad</li>
+        </ul>
+
+        <div class="nav nav--dark">
+          <button class="btn btn--ghost btn--ghost-dark" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Empezar bloque 3</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 16 · P11 (Likert)                                    -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q11" data-block="3" data-qid="q11" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Técnico</span>
+          <span class="qheader__count">Pregunta 11 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Cuento con las <span class="hl">herramientas tecnológicas</span>
+          que necesito para cumplir mis obligaciones.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 17 · P12 (Likert)                                    -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q12" data-block="3" data-qid="q12" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Técnico</span>
+          <span class="qheader__count">Pregunta 12 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Este grupo de trabajo cuenta con las
+          <span class="hl">competencias técnicas</span> y conocimiento
+          necesario para cumplir los estándares de calidad del proyecto.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 18 · P13 (Likert)                                    -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q13" data-block="3" data-qid="q13" data-qtype="likert">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Técnico</span>
+          <span class="qheader__count">Pregunta 13 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Para mí son claros los <span class="hl">estándares de calidad</span>
+          y nivel de detalle mínimo que deben cumplir mis entregables o productos.
+        </h2>
+
+        <div class="likert" role="radiogroup" aria-label="Escala de 1 a 4"></div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 19 · P14 (abierta)                                   -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q14" data-block="3" data-qid="q14" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Técnico</span>
+          <span class="qheader__count">Pregunta 14 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          ¿Qué <span class="hl">herramienta, recurso o conocimiento</span>
+          le hace falta hoy a este grupo para trabajar mejor?
+        </h2>
+        <p class="question__hint">
+          Si pueden, prioricen la que más necesitan y digan por qué.
+        </p>
+
+        <textarea class="textarea" name="q14" rows="6" maxlength="1500"
+          placeholder="Identifique la necesidad más prioritaria y explique brevemente por qué."></textarea>
+        <div class="textarea__counter"><span data-counter="q14">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Siguiente</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 20 · P15 (abierta)                                   -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="q15" data-block="3" data-qid="q15" data-qtype="open">
+      <div class="slide__inner question__inner">
+        <header class="qheader">
+          <span class="qheader__pill">Liderazgo Técnico</span>
+          <span class="qheader__count">Pregunta 15 de 15</span>
+        </header>
+
+        <h2 class="question__text">
+          Si pudieran sumar a este grupo un <span class="hl">perfil profesional</span>
+          o una <span class="hl">habilidad</span> que hoy no existe, ¿cuál sería
+          y qué problema concreto resolvería?
+        </h2>
+
+        <textarea class="textarea" name="q15" rows="6" maxlength="1500"
+          placeholder="Describa el perfil o habilidad y el problema que ayudaría a resolver."></textarea>
+        <div class="textarea__counter"><span data-counter="q15">0</span> / 1500</div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" data-action="next">Revisar y enviar</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 21 · REVISIÓN Y ENVÍO                                -->
+    <!-- ========================================================== -->
+    <section class="slide slide--light" data-slide="review">
+      <div class="slide__inner content__inner">
+        <span class="eyebrow">Paso final</span>
+        <h2 class="content__title">
+          Antes de enviar, <span class="hl">revisemos</span> que todo esté
+          completo.
+        </h2>
+        <p class="content__lead content__lead--tight">
+          Si encuentra algo en blanco, puede regresar a editarlo. Una vez
+          enviada, la respuesta queda registrada y no será modificable.
+        </p>
+
+        <div class="review" id="reviewList">
+          <!-- Generado por JS -->
+        </div>
+
+        <div class="nav">
+          <button class="btn btn--ghost" data-action="prev">Atrás</button>
+          <button class="btn btn--primary" id="submitBtn">
+            Enviar respuestas
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================== -->
+    <!--  SLIDE 22 · GRACIAS                                         -->
+    <!-- ========================================================== -->
+    <section class="slide slide--thanks" data-slide="thanks">
+      <div class="slide__inner thanks__inner">
+        <div class="thanks__check" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="42" height="42" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+
+        <h2 class="thanks__title">
+          Gracias por <span class="hl">su tiempo</span>.
+        </h2>
+        <p class="thanks__lead">
+          Sus respuestas quedaron registradas. La SGEP consolidará los
+          resultados por grupo y compartirá las acciones de fortalecimiento
+          que se deriven del diagnóstico.
+        </p>
+
+        <div class="thanks__meta">
+          <span class="thanks__metaLabel">Identificador de envío</span>
+          <span class="thanks__metaValue" id="submissionId">—</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mensaje flotante de error/notificación -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
