@@ -25,11 +25,12 @@
   const GROUPS = [
     { id: 'medina',   name: 'Equipo Daniel Medina',                type: 'Apoyo a la supervisión' },
     { id: 'prieto',   name: 'Equipo Jaime Prieto',                 type: 'Apoyo a la supervisión' },
-    { id: 'napo-lida', name: 'Equipos José Napoleón y Lida Giraldo', type: 'Apoyo a la supervisión (sesión conjunta)' },
+    { id: 'napo',     name: 'Equipos José Napoleón',              type: 'Apoyo a la supervisión' },
+    { id: 'lida',     name: 'Equipos Lida Giraldo',                type: 'Apoyo a la supervisión' },
     { id: 'molina',   name: 'Equipo María Mercedes Molina',        type: 'Apoyo a la supervisión' },
     { id: 'sossa',    name: 'Equipo Julián Sossa',                 type: 'Apoyo a la supervisión' },
     { id: 'jimenez',  name: 'Equipo Vanessa Jiménez',              type: 'Apoyo a la supervisión' },
-    { id: 'cervera',  name: 'Equipo Yory Cervera',                 type: 'Apoyo a la supervisión' },
+    { id: 'cervera',  name: 'Equipo Yury Cervera',                 type: 'Apoyo a la supervisión' },
     { id: 'tecnico',  name: 'Equipo Técnico Transversal',          type: 'Equipo transversal' },
     { id: 'juridico', name: 'Equipo Jurídico Transversal',         type: 'Equipo transversal' },
     { id: 'seguim',   name: 'Equipo de Seguimiento Transversal',   type: 'Equipo transversal' }
