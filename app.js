@@ -23,17 +23,17 @@
 
   /** Definición de los 10 grupos de trabajo de la SGEP. */
   const GROUPS = [
-    { id: 'medina',   name: 'Equipo SED 1 y Salud',                type: 'Apoyo a la supervisión' },
-    { id: 'prieto',   name: 'Equipo Urbanismos y Vivienda',                 type: 'Apoyo a la supervisión' },
-    { id: 'napo', name: 'Equipo Universidad Distrital',                    type: 'Apoyo a la supervisión'},
-    { id: 'lida', name: 'Equipo UAESP y Cultura',                    type: 'Apoyo a la supervisión'},
-    { id: 'molina',   name: 'Equipo SED 2',        type: 'Apoyo a la supervisión' },
-    { id: 'sossa',    name: 'Equipo CH San Juan de Dios',                 type: 'Apoyo a la supervisión' },
-    { id: 'jimenez',  name: 'Equipo Bronx Distrito Creativo',              type: 'Apoyo a la supervisión' },
-    { id: 'cervera',  name: 'Equipo Nodos',                 type: 'Apoyo a la supervisión' },
-    { id: 'tecnico',  name: 'Equipo Técnico Transversal',          type: 'Equipo transversal' },
-    { id: 'juridico', name: 'Equipo Jurídico Transversal',         type: 'Equipo transversal' },
-    { id: 'seguim',   name: 'Equipo de Seguimiento Transversal',   type: 'Equipo transversal' }
+    { id: 'SED_1',   name: 'Equipo SED 1 y Salud',                type: 'Apoyo a la supervisión' },
+    { id: 'URB_VIV',   name: 'Equipo Urbanismos y Vivienda',                 type: 'Apoyo a la supervisión' },
+    { id: 'DISTRI', name: 'Equipo Universidad Distrital',                    type: 'Apoyo a la supervisión'},
+    { id: 'UAESP', name: 'Equipo UAESP',                    type: 'Apoyo a la supervisión'},
+    { id: 'SED_2',   name: 'Equipo SED 2',        type: 'Apoyo a la supervisión' },
+    { id: 'CHSJD',    name: 'Equipo CH San Juan de Dios',                 type: 'Apoyo a la supervisión' },
+    { id: 'BDC',  name: 'Equipo Bronx Distrito Creativo',              type: 'Apoyo a la supervisión' },
+    { id: 'NOD_CUL',  name: 'Equipo Nodos y Cultura',                 type: 'Apoyo a la supervisión' },
+    { id: 'TEC',  name: 'Equipo Técnico Transversal',          type: 'Equipo transversal' },
+    { id: 'JUR', name: 'Equipo Jurídico Transversal',         type: 'Equipo transversal' },
+    { id: 'SEG',   name: 'Equipo de Seguimiento Transversal',   type: 'Equipo transversal' }
   ];
 
   /** Etiquetas de la escala Likert (4 puntos, sin punto medio neutro). */
