@@ -11,32 +11,24 @@
   // 0. CONFIGURACIÓN
   // ──────────────────────────────────────────────────────────────────────
 
-  /**
-   * URL del endpoint de Google Apps Script desplegado como Web App.
-   * Reemplazar este valor por la URL real después de desplegar el script.
-   * Si queda vacía, el envío hará una simulación local (modo desarrollo).
-   */
   const ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbxJXz39vWvM2-iVzGy1MydBLTnsjflkWnPDWbAy3RixnpsmUbffb99euSBdXt6E7JkDZQ/exec';
-  // Ej: 'https://script.google.com/macros/s/AKfycbx.../exec'
 
   const STORAGE_KEY = 'renobo_clima_v1';
 
-  /** Definición de los 10 grupos de trabajo de la SGEP. */
   const GROUPS = [
-    { id: 'SED_1',   name: 'Equipo SED 1 y Salud',                type: 'Apoyo a la supervisión' },
-    { id: 'URB_VIV',   name: 'Equipo Urbanismos y Vivienda',                 type: 'Apoyo a la supervisión' },
-    { id: 'DISTRI', name: 'Equipo Universidad Distrital',                    type: 'Apoyo a la supervisión'},
-    { id: 'UAESP', name: 'Equipo UAESP',                    type: 'Apoyo a la supervisión'},
-    { id: 'SED_2',   name: 'Equipo SED 2',        type: 'Apoyo a la supervisión' },
-    { id: 'CHSJD',    name: 'Equipo CH San Juan de Dios',                 type: 'Apoyo a la supervisión' },
-    { id: 'BDC',  name: 'Equipo Bronx Distrito Creativo',              type: 'Apoyo a la supervisión' },
-    { id: 'NOD_CUL',  name: 'Equipo Nodos y Cultura',                 type: 'Apoyo a la supervisión' },
-    { id: 'TEC',  name: 'Equipo Técnico Transversal',          type: 'Equipo transversal' },
-    { id: 'JUR', name: 'Equipo Jurídico Transversal',         type: 'Equipo transversal' },
-    { id: 'SEG',   name: 'Equipo de Seguimiento Transversal',   type: 'Equipo transversal' }
+    { id: 'SED_1',   name: 'Equipo SED 1 y Salud',               type: 'Apoyo a la supervisión' },
+    { id: 'URB_VIV', name: 'Equipo Urbanismos y Vivienda',       type: 'Apoyo a la supervisión' },
+    { id: 'DISTRI',  name: 'Equipo Universidad Distrital',       type: 'Apoyo a la supervisión' },
+    { id: 'UAESP',   name: 'Equipo UAESP',                       type: 'Apoyo a la supervisión' },
+    { id: 'SED_2',   name: 'Equipo SED 2',                       type: 'Apoyo a la supervisión' },
+    { id: 'CHSJD',   name: 'Equipo CH San Juan de Dios',         type: 'Apoyo a la supervisión' },
+    { id: 'BDC',     name: 'Equipo Bronx Distrito Creativo',     type: 'Apoyo a la supervisión' },
+    { id: 'NOD_CUL', name: 'Equipo Nodos y Cultura',             type: 'Apoyo a la supervisión' },
+    { id: 'TEC',     name: 'Equipo Técnico Transversal',         type: 'Equipo transversal' },
+    { id: 'JUR',     name: 'Equipo Jurídico Transversal',        type: 'Equipo transversal' },
+    { id: 'SEG',     name: 'Equipo de Seguimiento Transversal',  type: 'Equipo transversal' }
   ];
 
-  /** Etiquetas de la escala Likert (4 puntos, sin punto medio neutro). */
   const LIKERT = [
     { value: 1, label: 'Totalmente en desacuerdo' },
     { value: 2, label: 'En desacuerdo' },
@@ -44,7 +36,6 @@
     { value: 4, label: 'Totalmente de acuerdo' }
   ];
 
-  /** Etiquetas humanas para el resumen final. */
   const QUESTION_LABELS = {
     q1:  'P1 · Cliente y entrega',
     q2:  'P2 · Presupuesto',
@@ -67,7 +58,6 @@
   // 1. ESTADO
   // ──────────────────────────────────────────────────────────────────────
 
-  /** Estado de respuestas. P9 es un arreglo de objetos. */
   const state = {
     group: null,
     q1: '', q2: null, q3: null, q4: null, q5: '',
@@ -75,7 +65,6 @@
     q11: null, q12: null, q13: null, q14: '', q15: ''
   };
 
-  /** Slides en orden de navegación. */
   const slidesOrder = [
     'cover', 'context', 'group',
     'intro-1', 'q1', 'q2', 'q3', 'q4', 'q5',
@@ -107,8 +96,6 @@
       if (!raw) return;
       const parsed = JSON.parse(raw);
       if (parsed && parsed.state) Object.assign(state, parsed.state);
-      // No restauramos currentIndex automáticamente para no saltarse la portada;
-      // pero sí podemos usarlo si quisiéramos en una versión futura.
     } catch (_) { /* noop */ }
   }
 
@@ -117,7 +104,6 @@
   }
 
   function uid () {
-    // Identificador corto tipo "RB-XXXX-YYYY"
     const a = Math.random().toString(36).slice(2, 6).toUpperCase();
     const b = Math.random().toString(36).slice(2, 6).toUpperCase();
     return `RB-${a}-${b}`;
@@ -138,7 +124,6 @@
   function showSlide (index) {
     if (index < 0 || index >= slidesOrder.length) return;
 
-    // Validación antes de avanzar
     if (index > currentIndex) {
       const ok = validateSlide(slidesOrder[currentIndex]);
       if (!ok) return;
@@ -156,9 +141,7 @@
     target.classList.add('is-active');
     requestAnimationFrame(() => target.classList.add('is-entering'));
 
-    // Si entramos al review, regenerarlo
     if (slidesOrder[index] === 'review') renderReview();
-    // Si llegamos a thanks, asignar identificador (si aún no)
     if (slidesOrder[index] === 'thanks' && $('#submissionId').textContent === '—') {
       $('#submissionId').textContent = uid();
     }
@@ -190,14 +173,11 @@
       showToast('Por favor seleccione su grupo de trabajo antes de continuar.');
       return false;
     }
-    // Las preguntas son opcionales individualmente — el review final muestra cuáles
-    // quedaron en blanco para que el usuario decida si retroceder. Esto evita
-    // bloquear a quien sinceramente no tiene una respuesta para alguna pregunta abierta.
     return true;
   }
 
   // ──────────────────────────────────────────────────────────────────────
-  // 5. RENDER · GRUPOS DE TRABAJO
+  // 5. RENDER · GRUPOS DE TRABAJO  (handler corregido)
   // ──────────────────────────────────────────────────────────────────────
 
   function renderGroups () {
@@ -226,23 +206,23 @@
         </div>
       `;
 
+      // Handler correcto: marca el grupo seleccionado, NO auto-avanza.
       btn.addEventListener('click', () => {
-       state[qid] = opt.value;
-        $$('.likert__btn', wrap).forEach(b => {
-    const v = parseInt(b.dataset.value, 10);
-    b.classList.toggle('is-selected', v === opt.value);
-    b.setAttribute('aria-checked', v === opt.value ? 'true' : 'false');
-  });
-  saveLocal();
-  // Se eliminó el auto-avance para que sea manual
-});
+        state.group = g.id;
+        $$('.card', wrap).forEach(c => {
+          const isSel = c.dataset.groupId === g.id;
+          c.classList.toggle('is-selected', isSel);
+          c.setAttribute('aria-checked', isSel ? 'true' : 'false');
+        });
+        saveLocal();
+      });
 
       wrap.appendChild(btn);
     });
   }
 
   // ──────────────────────────────────────────────────────────────────────
-  // 6. RENDER · ESCALAS LIKERT
+  // 6. RENDER · ESCALAS LIKERT  (sin auto-avance)
   // ──────────────────────────────────────────────────────────────────────
 
   function renderLikertScales () {
@@ -270,8 +250,8 @@
             b.setAttribute('aria-checked', v === opt.value ? 'true' : 'false');
           });
           saveLocal();
-          // UX fluido: avanzar automáticamente tras 380ms
-         if (slidesOrder[currentIndex + 1] !== 'review') setTimeout(() => next(), 380);
+          // ⛔️ Auto-avance eliminado.
+          // El usuario debe pulsar "Siguiente" para pasar a la siguiente pregunta.
         });
         wrap.appendChild(btn);
       });
@@ -287,7 +267,6 @@
       const qid = slide.dataset.qid;
       const ta = $('textarea', slide);
       const counter = $(`[data-counter="${qid}"]`, slide);
-      // Restaurar valor previo
       if (state[qid]) ta.value = state[qid];
       counter.textContent = ta.value.length;
 
@@ -308,7 +287,6 @@
     wrap.innerHTML = '';
 
     if (state.q9.length === 0) {
-      // Crear una fila vacía inicial
       state.q9.push({ scope: 'interna', name: '', issue: '', since: '' });
     }
 
@@ -343,7 +321,6 @@
         </button>
       `;
 
-      // Bind a inputs
       $$('[data-field]', row).forEach(el => {
         el.addEventListener('input', () => {
           actor[el.dataset.field] = el.value;
@@ -355,7 +332,6 @@
         });
       });
 
-      // Bind a botón eliminar
       $('.actor__remove', row).addEventListener('click', () => {
         state.q9.splice(idx, 1);
         saveLocal();
@@ -424,16 +400,13 @@
       timestamp: new Date().toISOString(),
       group: state.group,
       groupName: state.group ? (GROUPS.find(g => g.id === state.group) || {}).name : null,
-      // Bloque 1
       q1: state.q1,
       q2: state.q2, q3: state.q3, q4: state.q4,
       q5: state.q5,
-      // Bloque 2
       q6: state.q6,
       q7: state.q7, q8: state.q8,
       q9: state.q9.filter(a => (a.name || '').trim()),
       q10: state.q10,
-      // Bloque 3
       q11: state.q11, q12: state.q12, q13: state.q13,
       q14: state.q14,
       q15: state.q15
@@ -451,23 +424,17 @@
 
     try {
       if (!ENDPOINT_URL) {
-        // Modo desarrollo: simular envío
         console.warn('[RenoBo] ENDPOINT_URL no configurado. Simulando envío. Payload:', payload);
         await new Promise(r => setTimeout(r, 800));
       } else {
-        // Apps Script no acepta CORS preflight con application/json,
-        // por eso usamos text/plain (Apps Script lo lee igual desde e.postData.contents)
         const res = await fetch(ENDPOINT_URL, {
           method: 'POST',
-          mode: 'no-cors', // Apps Script Web App suele requerir esto
+          mode: 'no-cors',
           headers: { 'Content-Type': 'text/plain;charset=utf-8' },
           body: JSON.stringify(payload)
         });
-        // En modo no-cors no podemos leer la respuesta, pero si no hubo error
-        // de red asumimos éxito. Apps Script registra la fila en cualquier caso.
       }
 
-      // Mostrar pantalla de gracias
       $('#submissionId').textContent = payload.submissionId;
       next();
       clearLocal();
@@ -498,13 +465,11 @@
       state.q9.push({ scope: 'interna', name: '', issue: '', since: '' });
       saveLocal();
       renderActors();
-      // Scroll al último elemento
       const list = $('#actorsList');
       const last = list.lastElementChild;
       if (last) last.querySelector('input').focus();
     });
 
-    // Atajos de teclado: Enter en pantallas que no sean textareas avanza
     document.addEventListener('keydown', e => {
       if (e.key !== 'Enter') return;
       const tag = (e.target.tagName || '').toLowerCase();
@@ -529,7 +494,6 @@
     renderActors();
     bindGlobal();
     updateProgress();
-    // Asegurar que la primera slide tenga la transición aplicada
     requestAnimationFrame(() => {
       const first = $('.slide.is-active');
       if (first) first.classList.add('is-entering');
