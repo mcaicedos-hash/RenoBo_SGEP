@@ -227,13 +227,15 @@
       `;
 
       btn.addEventListener('click', () => {
-        state.group = g.id;
-        $$('.card', wrap).forEach(c => {
-          c.classList.toggle('is-selected', c.dataset.groupId === g.id);
-          c.setAttribute('aria-checked', c.dataset.groupId === g.id ? 'true' : 'false');
-        });
-        saveLocal();
-      });
+       state[qid] = opt.value;
+        $$('.likert__btn', wrap).forEach(b => {
+    const v = parseInt(b.dataset.value, 10);
+    b.classList.toggle('is-selected', v === opt.value);
+    b.setAttribute('aria-checked', v === opt.value ? 'true' : 'false');
+  });
+  saveLocal();
+  // Se eliminó el auto-avance para que sea manual
+});
 
       wrap.appendChild(btn);
     });
