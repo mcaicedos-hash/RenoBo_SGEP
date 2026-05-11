@@ -269,7 +269,7 @@
           });
           saveLocal();
           // UX fluido: avanzar automáticamente tras 380ms
-          setTimeout(() => next(), 380);
+         if (slidesOrder[currentIndex + 1] !== 'review') setTimeout(() => next(), 380);
         });
         wrap.appendChild(btn);
       });
